@@ -147,7 +147,7 @@
       "publisher": "MicrosoftWindowsServer",
       "offer": "WindowsServer",
       "sku": "2012-R2-Datacenter",
-      "version": "latest",
+      "version": "4.0.20161012",
       "vmName": "FW",
       "osdisk": "osdiskfw",
       "nicName": "NICFW",
