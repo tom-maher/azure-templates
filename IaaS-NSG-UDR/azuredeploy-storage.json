@@ -22,8 +22,8 @@
     }
   },
   "variables": {
-    "stdStorageName": "[concat('ukspocssa', uniqueString(resourceGroup().id))]",
-    "prmStorageName": "[concat('ukspocssa', uniqueString(resourceGroup().id))]"
+    "stdStorageName": "[concat('ukspocstdsa', uniqueString(resourceGroup().id))]",
+    "prmStorageName": "[concat('ukspocprmsa', uniqueString(resourceGroup().id))]"
   },
   "resources": [
     {
