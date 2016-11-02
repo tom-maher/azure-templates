@@ -93,13 +93,6 @@
         "description": "Name for the NSG used to allow RDP, SQL, and block Internet"
       }
     },
-    "stdStorageName": {
-      "type": "string",
-      "defaultValue": "ukspocssa2864",
-      "metadata": {
-        "description": "Name for simple storage account."
-      }
-    },
     "stdStorageType": {
       "type": "string",
       "defaultValue": "Standard_LRS",
@@ -110,13 +103,6 @@
       ],
       "metadata": {
         "description": "Storage type."
-      }
-    },
-    "prmStorageName": {
-      "type": "string",
-      "defaultValue": "ukspocpsa2864",
-      "metadata": {
-        "description": "Name for simple storage account."
       }
     },
     "prmStorageType": {
@@ -198,6 +184,8 @@
       "avsetName": "ASSQL"
     },
     "location": "[resourceGroup().location]",
+    "stdStorageName": "[concat('ukspocstdsa', uniqueString(resourceGroup().id))]",
+    "prmStorageName": "[concat('ukspocprmsa', uniqueString(resourceGroup().id))]",
     "vmStorageAccountContainerName": "vhds",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('vnetName'))]",
     "frontEndSubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('frontEndSubnetName'))]",
@@ -456,7 +444,7 @@
           "osDisk": {
             "name": "[concat(variables('fwVMSettings').osdisk,copyindex(1))]",
             "vhd": {
-              "uri": "[concat('http://', parameters('stdStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('fwVMSettings').osdisk, copyindex(1),'.vhd')]"
+              "uri": "[concat('http://', variables('stdStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('fwVMSettings').osdisk, copyindex(1),'.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -510,7 +498,7 @@
           "osDisk": {
             "name": "[concat(variables('webVMSettings').osdisk,copyindex(1))]",
             "vhd": {
-              "uri": "[concat('http://', parameters('stdStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('webVMSettings').osdisk, copyindex(1),'.vhd')]"
+              "uri": "[concat('http://', variables('stdStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('webVMSettings').osdisk, copyindex(1),'.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -564,7 +552,7 @@
           "osDisk": {
             "name": "[concat(variables('sqlVMSettings').osdisk,copyindex(1))]",
             "vhd": {
-              "uri": "[concat('http://', parameters('prmStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('sqlVMSettings').osdisk, copyindex(1),'.vhd')]"
+              "uri": "[concat('http://', variables('prmStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('sqlVMSettings').osdisk, copyindex(1),'.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -572,7 +560,7 @@
           "dataDisks": [
             {
               "vhd": {
-                "uri": "[concat('http://', parameters('prmStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('sqlVMSettings').datadisk, copyindex(1),'-1','.vhd')]"
+                "uri": "[concat('http://', variables('prmStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('sqlVMSettings').datadisk, copyindex(1),'-1','.vhd')]"
               },
               "name": "[concat(variables('sqlVMSettings').datadisk,copyindex(1),'-data-disk1')]",
               "diskSizeGB": "127",
@@ -581,7 +569,7 @@
             },
             {
               "vhd": {
-                "uri": "[concat('http://', parameters('prmStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('sqlVMSettings').datadisk, copyindex(1),'-2','.vhd')]"
+                "uri": "[concat('http://', variables('prmStorageName'), '.blob.core.windows.net/', variables('vmStorageAccountContainerName'), '/', variables('sqlVMSettings').datadisk, copyindex(1),'-2','.vhd')]"
               },
               "name": "[concat(variables('sqlVMSettings').datadisk,copyindex(1),'-data-disk2')]",
               "diskSizeGB": "127",
