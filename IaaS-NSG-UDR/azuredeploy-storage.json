@@ -2,13 +2,6 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "stdStorageName": {
-      "type": "string",
-      "defaultValue": "testvnetstoragestd",
-      "metadata": {
-        "description": "Name for simple storage account."
-      }
-    },
     "stdStorageType": {
       "type": "string",
       "defaultValue": "Standard_LRS",
@@ -17,13 +10,6 @@
         "Standard_GRS",
         "Standard_ZRS"
       ]
-    },
-    "prmStorageName": {
-      "type": "string",
-      "defaultValue": "testvnetstorageprm",
-      "metadata": {
-        "description": "Name for simple storage account."
-      }
     },
     "prmStorageType": {
       "type": "string",
@@ -35,9 +21,13 @@
       ]
     }
   },
+  "variables": {
+    "stdStorageName": "[concat('ukspocssa', uniqueString(resourceGroup().id))]",
+    "prmStorageName": "[concat('ukspocssa', uniqueString(resourceGroup().id))]"
+  },
   "resources": [
     {
-      "name": "[parameters('stdStorageName')]",
+      "name": "[variables('stdStorageName')]",
       "type": "Microsoft.Storage/storageAccounts",
       "location": "[resourceGroup().location]",
       "apiVersion": "2015-05-01-preview",
@@ -50,7 +40,7 @@
       }
     },
     {
-      "name": "[parameters('prmStorageName')]",
+      "name": "[variables('prmStorageName')]",
       "type": "Microsoft.Storage/storageAccounts",
       "location": "[resourceGroup().location]",
       "apiVersion": "2015-05-01-preview",
