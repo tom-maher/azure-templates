@@ -95,7 +95,7 @@
     },
     "stdStorageName": {
       "type": "string",
-      "defaultValue": "testvnetstoragestd",
+      "defaultValue": "ukspocssa2864",
       "metadata": {
         "description": "Name for simple storage account."
       }
@@ -114,7 +114,7 @@
     },
     "prmStorageName": {
       "type": "string",
-      "defaultValue": "testvnetstorageprm",
+      "defaultValue": "ukspocpsa2864",
       "metadata": {
         "description": "Name for simple storage account."
       }
@@ -203,7 +203,7 @@
     "frontEndSubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('frontEndSubnetName'))]",
     "backEndSubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('backEndSubnetName'))]",
     "dmzSubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('dmzSubnetName'))]",
-    "templateBaseUrl": "https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/"
+    "templateBaseUrl": "https://raw.githubusercontent.com/tom-maher/azure-templates/master/IaaS-NSG-UDR/"
   },
   "resources": [
     {
